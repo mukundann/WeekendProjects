@@ -15,6 +15,8 @@
             --border: #cfd8dc;
             --danger-light: #ffebee;
             --danger-text: #c62828;
+            --info-light: #e0f7fa;
+            --info-text: #006064;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #f8f9fa; color: var(--dark); line-height: 1.6; padding: 15px; }
@@ -25,9 +27,11 @@
         .section-card { background-color: var(--light); border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); border-top: 5px solid var(--primary); }
         .section-card.alt { border-top-color: var(--accent); }
         .section-card.danger { border-top-color: var(--danger-text); }
+        .section-card.info { border-top-color: #00bcd4; }
         h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .section-card.alt h2 { color: var(--accent); }
         .section-card.danger h2 { color: var(--danger-text); }
+        .section-card.info h2 { color: var(--info-text); }
         
         /* INFRASTRUCTURE BLUEPRINT INFOGRAPHIC STYLING */
         .infographic-container { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
@@ -75,7 +79,7 @@
             <div class="roster-card" style="border-left: 4px solid var(--accent);">
                 <span class="tag heavy">🏋️ Heavy Duty / Infrastructure</span>
                 <h3>Jai (Lead), Giri, Mukundan</h3>
-                <p style="font-size: 0.85rem; color: #555;">Jai drives site layout precision and tech oversight. Giri and Mukundan leverage raw power under Jai's direction to handle mulch scraping, tool leverage work, and soil logistics.</p>
+                <p style="font-size: 0.85rem; color: #555;">Jai drives site layout precision and tech oversight. Giri and Mukundan leverage raw power under Jai's direction to handle mulch scraping, frame assembly, tool leverage work, and soil logistics.</p>
             </div>
             <div class="roster-card" style="border-left: 4px solid var(--primary);">
                 <span class="tag light">🌿 Precision Sowing & Agile Work</span>
@@ -122,102 +126,4 @@
 | JASMINE(L)   OKRA(S)    TOMATO(L) |
 |                                   |
 |           JADE BEANS(S)           |
-|                                   |
-| ZUCCHINI(S)          STRAWBERRY(L)|
-+-----------------------------------+
-[ FRONT CONCRETE PATIO WALKWAY ]</div>
-                <p style="font-size: 0.85rem; color: #558b2f;">* Optimize placement lengthwise running parallel to the active concrete footpath edge for effortless management access.</p>
-            </div>
-            
-            <div class="bed-blueprint phase2">
-                <h3 style="color:var(--accent); margin-bottom:12px;">📦 BED #2: Autumn Expansion (Staggered Run)</h3>
-                <div class="grid-matrix">
-[ BACK FENCE LINE: HIGH SUN ]
-+-----------------------------------+
-|       AVARAKAI INDIAN BEANS       |
-|       (Climbing Main Trellis)     |
-|                                   |
-|   CARROT MIX SOW    SUGAR PEAS    |
-|   (Late August)     (Sept Cool)   |
-+-----------------------------------+
-[ FRONT CONCRETE PATIO WALKWAY ]</div>
-                <p style="font-size: 0.85rem; color: #ef6c00;">* Stagger implementation until late summer window to leverage cool season maturation metrics for deep root systems.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="section-card alt">
-        <h2>🌱 Varietal Depth & Microclimate Matrix</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Cultivar Variety</th>
-                    <th>Method</th>
-                    <th>Sow Depth</th>
-                    <th>Optimal Microclimate Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Clemson Okra</strong></td>
-                    <td>Direct Seed</td>
-                    <td>1/2"</td>
-                    <td>Rear center canopy. High heat/drought resilience profile.</td>
-                </tr>
-                <tr>
-                    <td><strong>Jade Bush Bean</strong></td>
-                    <td>Direct Seed</td>
-                    <td>1"</td>
-                    <td>Mid-bed spacing intervals. Fixes localized atmospheric nitrogen.</td>
-                </tr>
-                <tr>
-                    <td><strong>Dark Green Zucchini</strong></td>
-                    <td>Direct Seed</td>
-                    <td>1"</td>
-                    <td>Front corner. Allow space for broad external leaf expansion.</td>
-                </tr>
-                <tr>
-                    <td><strong>Slow Bolt Cilantro</strong></td>
-                    <td>Direct Seed</td>
-                    <td>1/4"</td>
-                    <td>Understory shadow zones behind tall stalks to delay premature bolting.</td>
-                </tr>
-                <tr>
-                    <td><strong>Avarakai (Indian Bean)</strong></td>
-                    <td>July Seed</td>
-                    <td>1"</td>
-                    <td>Rear trellis boundary. Requires vertical fence support mesh layout.</td>
-                </tr>
-                <tr>
-                    <td><strong>Colorful Carrot Mix</strong></td>
-                    <td>August Seed</td>
-                    <td>1/4"</td>
-                    <td>Requires persistent top-layer moisture profiles during germination.</td>
-                </tr>
-                <tr>
-                    <td><strong>Dwarf Sugar Pea</strong></td>
-                    <td>Sept Seed</td>
-                    <td>1"</td>
-                    <td>Cool season dependent. Avoid high-heat atmospheric thresholds.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section-card">
-        <h2>🛠️ Substrate Engineering & Execution Workflow</h2>
-        <ol>
-            <li><strong>Surface Clearance (Jai, Giri, Mukundan):</strong> Drive a wide flat shovel across the targeted footprint to scrape back surface bark woodchips and expose underlying earth.</li>
-            <li><strong>Sub-Base Fracturing (Jai, Giri, Mukundan):</strong> Use a D-handle digging fork to penetrate the compacted native dirt base. Apply foot leverage to rock and crack open clay pan pathways.</li>
-            <li><strong>Weed Suppression (Team 1 + Kids):</strong> Place down dense, overlapping sheets of unprinted brown shipping cardboard over the fractured earth base and soak completely with water.</li>
-            <li><strong>Substrate Integration (Giri, Mukundan, Kids):</strong> Set up your modular open-bottom raised frames directly above the cardboard. Discharge your rich organic gardening soil bags and aeration potting mixes together inside the modular structure to create an airy, fertile growth zone.</li>
-        </ol>
-    </div>
-
-    <footer>
-        <p>Open Source Backyard Engineering Blueprint Manual • San Jose Team Edition</p>
-    </footer>
-</div>
-
-</body>
-</html>
+|
