@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backyard Garden Architecture | San Jose</title>
+    <title>Garden Architecture Blueprint & Manual</title>
     <style>
         :root {
             --primary: #1b5e20;
@@ -16,74 +16,86 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #f8f9fa; color: var(--dark); line-height: 1.6; padding: 15px; }
-        .wrapper { max-width: 950px; margin: 0 auto; }
-        header { background: linear-gradient(135deg, var(--primary), #388e3c); color: var(--light); padding: 25px; border-radius: 10px; margin-bottom: 25px; text-align: center; }
-        .section-card { background-color: var(--light); border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); border-top: 4px solid var(--primary); }
+        .wrapper { max-width: 1000px; margin: 0 auto; }
+        header { background: linear-gradient(135deg, var(--primary), #388e3c); color: var(--light); padding: 30px 20px; border-radius: 12px; margin-bottom: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        header h1 { font-size: 2rem; margin-bottom: 6px; letter-spacing: -0.5px; }
+        header p { font-size: 1.05rem; opacity: 0.9; }
+        .section-card { background-color: var(--light); border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); border-top: 5px solid var(--primary); }
         .section-card.alt { border-top-color: var(--accent); }
-        h2 { color: var(--primary); font-size: 1.3rem; margin-bottom: 12px; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
-        .gallery-item { background: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 6px; text-align: center; }
-        .gallery-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
-        .gallery-item p { font-size: 0.85rem; font-weight: bold; margin-top: 8px; color: var(--dark); }
-        .split-layout { display: flex; flex-direction: column; gap: 15px; margin: 15px 0; }
+        h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .section-card.alt h2 { color: var(--accent); }
+        
+        /* INFRASTRUCTURE BLUEPRINT INFOGRAPHIC STYLING */
+        .infographic-container { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
+        .infographic-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .infographic-card img { width: 100%; height: auto; display: block; max-height: 900px; object-fit: contain; background: #fdfdfd; }
+        .infographic-caption { background: #f8f9fa; padding: 12px 15px; border-top: 1px solid var(--border); font-size: 0.9rem; color: #455a64; }
+
+        .split-layout { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
         @media (min-width: 768px) { .split-layout { flex-direction: row; } }
-        .bed-blueprint { flex: 1; background: #f9fbe7; border: 2px dashed #9ccc65; border-radius: 6px; padding: 15px; }
+        .bed-blueprint { flex: 1; background: #f9fbe7; border: 2px dashed #9ccc65; border-radius: 8px; padding: 20px; }
         .bed-blueprint.phase2 { background: var(--accent-light); border-color: #ffb74d; }
-        .grid-matrix { font-family: monospace; background: #263238; color: #80cbc4; padding: 12px; border-radius: 4px; font-size: 0.85rem; white-space: pre; overflow-x: auto; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
-        th, td { border: 1px solid var(--border); padding: 10px; text-align: left; }
-        th { background-color: var(--primary-light); color: var(--primary); }
+        .grid-matrix { font-family: monospace; background: #263238; color: #80cbc4; padding: 15px; border-radius: 6px; font-size: 0.85rem; white-space: pre; overflow-x: auto; margin-bottom: 15px; line-height: 1.4; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
+        th, td { border: 1px solid var(--border); padding: 12px; text-align: left; }
+        th { background-color: var(--primary-light); color: var(--primary); font-weight: 600; }
         tr:nth-child(even) { background-color: #fcfcfc; }
-        ol, ul { padding-left: 20px; font-size: 0.9rem; margin-bottom: 10px; }
-        li { margin-bottom: 5px; }
-        footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: #90a4ae; padding: 15px; border-top: 1px solid var(--border); }
+        
+        ol, ul { padding-left: 20px; font-size: 0.95rem; }
+        li { margin-bottom: 8px; }
+        footer { text-align: center; margin-top: 40px; font-size: 0.85rem; color: #90a4ae; padding: 20px; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
     <header>
-        <h1>Backyard Garden Architecture</h1>
-        <p>Two-Bed Staggered Blueprint • San Jose, CA</p>
+        <h1>Modular Garden Architecture Manual</h1>
+        <p>Deployment Blueprints, Components, & Tooling Application</p>
     </header>
 
     <div class="section-card">
-        <h2>📸 Reference Field Assets</h2>
-        <p style="font-size: 0.9rem;">Visual site context mapped directly to repository asset references.</p>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="assets/yard-layout.jpg" alt="Active Stock Layout">
-                <p>Active Plant Stock & Yard Center</p>
+        <h2>📸 Reference Field Assets & Component Schematics</h2>
+        <p style="font-size: 0.95rem; margin-bottom: 15px;">Comprehensive architectural schematics isolating component parameters, spatial layouts, tool actions, and deep substrate preparation pipelines.</p>
+        
+        <div class="infographic-container">
+            <div class="infographic-card">
+                <img src="assets/yard-layout.jpg" alt="Garden Components and Purchasing Blueprint Image">
+                <div class="infographic-caption">
+                    <strong>Schematic 1.0: Component Architecture Map</strong> – Individual breakdown tracking purchase packages, live starter distributions, and horizontal space allocation guidelines.
+                </div>
             </div>
-            <div class="gallery-item">
-                <img src="assets/site-prep.jpg" alt="Target Mulch Zone">
-                <p>Target Side-Yard Mulch Footprint</p>
-            </div>
-            <div class="gallery-item">
-                <img src="assets/tools.jpg" alt="Deployment Tools">
-                <p>Sub-Base Fracturing Tools</p>
+            
+            <div class="infographic-card">
+                <img src="assets/tools.jpg" alt="Garden Tools and Site Prep Diagram Image">
+                <div class="infographic-caption">
+                    <strong>Schematic 1.1: Substrate Fractioning & Tooling Mechanics</strong> – Deep-tier soil engineering workflow utilizing transfer tools and digging tines to fracture native clay compaction beneath the bed.
+                </div>
             </div>
         </div>
     </div>
 
     <div class="section-card">
-        <h2>🛏️ Spatial Deployment & Planting Maps</h2>
+        <h2>🛏️ Bed Layout & Successional Pipeline</h2>
         <div class="split-layout">
             <div class="bed-blueprint">
-                <h3 style="color:var(--primary);">📦 BED #1: Summer Pipeline</h3>
+                <h3 style="color:var(--primary); margin-bottom:12px;">📦 BED #1: Summer Pipeline (Active Now)</h3>
                 <div class="grid-matrix">
 [ BACK FENCE LINE: HIGH SUN ]
 +-----------------------------------+
-| JASMINE      OKRA       TOMATO    |
+| JASMINE(L)   OKRA(S)    TOMATO(L) |
 |                                   |
-|           JADE BUSH BEANS         |
+|           JADE BEANS(S)           |
 |                                   |
-| ZUCCHINI             STRAWBERRY   |
+| ZUCCHINI(S)          STRAWBERRY(L)|
 +-----------------------------------+
-[ FRONT PATIO WALKWAY ]</div>
+[ FRONT CONCRETE PATIO WALKWAY ]</div>
+                <p style="font-size: 0.85rem; color: #558b2f;">* Optimize placement lengthwise running parallel to the active concrete footpath edge for effortless management access.</p>
             </div>
+            
             <div class="bed-blueprint phase2">
-                <h3 style="color:var(--accent);">📦 BED #2: Autumn Expansion</h3>
+                <h3 style="color:var(--accent); margin-bottom:12px;">📦 BED #2: Autumn Expansion (Staggered Run)</h3>
                 <div class="grid-matrix">
 [ BACK FENCE LINE: HIGH SUN ]
 +-----------------------------------+
@@ -93,37 +105,82 @@
 |   CARROT MIX SOW    SUGAR PEAS    |
 |   (Late August)     (Sept Cool)   |
 +-----------------------------------+
-[ FRONT PATIO WALKWAY ]</div>
+[ FRONT CONCRETE PATIO WALKWAY ]</div>
+                <p style="font-size: 0.85rem; color: #ef6c00;">* Stagger implementation until late summer window to leverage cool season maturation metrics for deep root systems.</p>
             </div>
         </div>
     </div>
 
     <div class="section-card alt">
-        <h2>🌱 Varietal Depth Matrix</h2>
+        <h2>🌱 Varietal Depth & Microclimate Matrix</h2>
         <table>
             <thead>
-                <tr><th>Variety</th><th>Method</th><th>Depth</th><th>Notes</th></tr>
+                <tr>
+                    <th>Cultivar Variety</th>
+                    <th>Method</th>
+                    <th>Sow Depth</th>
+                    <th>Optimal Microclimate Location</th>
+                </tr>
             </thead>
             <tbody>
-                <tr><td><strong>Clemson Okra</strong></td><td>Direct Seed Now</td><td>1/2"</td><td>Back center. High heat resiliency.</td></tr>
-                <tr><td><strong>Jade Bush Bean</strong></td><td>Direct Seed Now</td><td>1"</td><td>Mid-bed spacing filler. Fixes nitrogen.</td></tr>
-                <tr><td><strong>Zucchini Squash</strong></td><td>Direct Seed Now</td><td>1"</td><td>Front-left corner. Needs massive width.</td></tr>
-                <tr><td><strong>Avarakai Bean</strong></td><td>Seed in July</td><td>1"</td><td>Rear wall climber. Share trellis with Jasmine.</td></tr>
+                <tr>
+                    <td><strong>Clemson Okra</strong></td>
+                    <td>Direct Seed</td>
+                    <td>1/2"</td>
+                    <td>Rear center canopy. High heat/drought resilience profile.</td>
+                </tr>
+                <tr>
+                    <td><strong>Jade Bush Bean</strong></td>
+                    <td>Direct Seed</td>
+                    <td>1"</td>
+                    <td>Mid-bed spacing intervals. Fixes localized atmospheric nitrogen.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dark Green Zucchini</strong></td>
+                    <td>Direct Seed</td>
+                    <td>1"</td>
+                    <td>Front corner. Allow space for broad external leaf expansion.</td>
+                </tr>
+                <tr>
+                    <td><strong>Slow Bolt Cilantro</strong></td>
+                    <td>Direct Seed</td>
+                    <td>1/4"</td>
+                    <td>Understory shadow zones behind tall stalks to delay premature bolting.</td>
+                </tr>
+                <tr>
+                    <td><strong>Avarakai (Indian Bean)</strong></td>
+                    <td>July Seed</td>
+                    <td>1"</td>
+                    <td>Rear trellis boundary. Requires vertical fence support mesh layout.</td>
+                </tr>
+                <tr>
+                    <td><strong>Colorful Carrot Mix</strong></td>
+                    <td>August Seed</td>
+                    <td>1/4"</td>
+                    <td>Requires persistent top-layer moisture profiles during germination.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dwarf Sugar Pea</strong></td>
+                    <td>Sept Seed</td>
+                    <td>1"</td>
+                    <td>Cool season dependent. Avoid high-heat atmospheric thresholds.</td>
+                </tr>
             </tbody>
         </table>
     </div>
 
     <div class="section-card">
-        <h2>🛠️ Site Implementation Flow</h2>
+        <h2>🛠️ Substrate Engineering & Execution Workflow</h2>
         <ol>
-            <li>Scrape surface mulch using the transfer shovel to find solid earth.</li>
-            <li>Drive the digging fork deep into the sub-base layer to break up clay compaction.</li>
-            <li>Lay down clean brown box cardboard, assemble frames, and completely blend the soil profile.</li>
+            <li><strong>Surface Clearance:</strong> Drive a wide flat shovel across the targeted footprint to scrape back surface bark woodchips and expose underlying earth.</li>
+            <li><strong>Sub-Base Fracturing:</strong> Use a D-handle digging fork to penetrate the compacted native dirt base. Apply foot leverage to rock and crack open clay pan pathways.</li>
+            <li><strong>Weed Suppression:</strong> Place down dense, overlapping sheets of unprinted brown shipping cardboard over the fractured earth base and soak completely with water.</li>
+            <li><strong>Substrate Integration:</strong> Set up your modular open-bottom raised frames directly above the cardboard. Discharge your rich organic gardening soil bags and aeration potting mixes together inside the modular structure to create an airy, fertile growth zone.</li>
         </ol>
     </div>
 
     <footer>
-        <p>Engineered Locally for the South Bay Ecosystem • 2026</p>
+        <p>Open Source Backyard Engineering Blueprint Manual</p>
     </footer>
 </div>
 
