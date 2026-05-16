@@ -1,0 +1,316 @@
+import base64
+
+# Read the uploaded image to verify we can handle it or use a stylized design
+# Since we need to output an HTML layout for the user, let's build a stunning, highly comprehensive 
+# Gardening Blueprint HTML file and convert it to a PDF or provide the HTML code as requested. 
+# Wait, the user asked for "a html page". Let's create an incredible, interactive, beautifully styled HTML document 
+# containing their custom planting layout, a precise calendar for San Jose, watering logs, and care guides.
+# Let's save it as a file first via Python to ensure it's beautifully packaged, and provide a clear download.
+
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Garden Blueprint - San Jose</title>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #e8f5e9;
+            --accent-color: #f57c00;
+            --accent-light: #fff3e0;
+            --text-dark: #263238;
+            --text-light: #ffffff;
+            --bg-color: #fafafa;
+            --card-bg: #ffffff;
+            --border-color: #cfd8dc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1b5e20, #43a047);
+            color: var(--text-light);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .card.alt-accent {
+            border-left-color: var(--accent-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card.alt-accent h2 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        .bed-container {
+            display: table;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 15px;
+            margin: 15px 0;
+        }
+
+        .bed-box {
+            display: table-cell;
+            background: #f1f8e9;
+            border: 2px dashed #81c784;
+            border-radius: 8px;
+            padding: 20px;
+            width: 50%;
+            vertical-align: top;
+        }
+
+        .bed-box.july {
+            background: #fff3e0;
+            border-color: #ffb74d;
+        }
+
+        .bed-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #1b5e20;
+        }
+
+        .bed-box.july .bed-title {
+            color: #e65100;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-left: 5px;
+        }
+
+        .badge.now { background-color: #4caf50; color: white; }
+        .badge.later { background-color: #ff9800; color: white; }
+        .badge.seed { background-color: #2196f3; color: white; }
+        .badge.live { background-color: #9c27b0; color: white; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: #1b5e20;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fbfbfb;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #78909c;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>My Personal Garden Blueprint</h1>
+        <p>Two-Bed Custom Setup Plan • San Jose, CA (Cottle Road)</p>
+    </header>
+
+    <div class="card">
+        <h2>📅 The Split-Season Strategy</h2>
+        <p>Because you have two beds and 7 cubic feet of soil on hand today, splitting your project ensures zero waste and sets you up perfectly for continuous harvests from summer through winter.</p>
+        
+        <div class="bed-container">
+            <div class="bed-box">
+                <div class="bed-title">🛏️ BED #1: The Summer Patch</div>
+                <p><strong>Timeline:</strong> Plant immediately (Mid-May)</p>
+                <p><strong>Soil Fill:</strong> Use all 4 current bags (2 Sta-Green + 2 Miracle-Gro) to fully fill this frame today.</p>
+                <ul>
+                    <li><strong>Strawberries</strong> <span class="badge live">Live</span> (Front Edge)</li>
+                    <li><strong>Tomatoes</strong> <span class="badge live">Live</span> (Back Corner + Stake)</li>
+                    <li><strong>Clemson Spineless Okra</strong> <span class="badge seed">Seed</span> (Back Center)</li>
+                    <li><strong>Jade Bush Beans</strong> <span class="badge seed">Seed</span> (Midsection)</li>
+                    <li><strong>Zucchini Squash</strong> <span class="badge seed">Seed</span> (Dedicated Corner)</li>
+                    <li><strong>Slow Bolt Cilantro</strong> <span class="badge seed">Seed</span> (Under Shade)</li>
+                </ul>
+            </div>
+            
+            <div class="bed-box july">
+                <div class="bed-title">🛏️ BED #2: The Climbing & Fall Bed</div>
+                <p><strong>Timeline:</strong> Assemble & Fill in <strong>July</strong></p>
+                <p><strong>Soil Fill:</strong> Purchase 4-5 more bags when ready to assemble.</p>
+                <ul>
+                    <li><strong>Star Jasmine</strong> <span class="badge live">Live</span> (Back Wall + Trellis)</li>
+                    <li><strong>Avarakai (Broad Beans)</strong> <span class="badge seed">Seed</span> (Plant in July)</li>
+                    <li><strong>Colorful Carrot Mix</strong> <span class="badge seed">Seed</span> (Sow Late August)</li>
+                    <li><strong>Dwarf Grey Sugar Pea</strong> <span class="badge seed">Seed</span> (Sow Late August)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card alt-accent">
+        <h2>🌱 Quick Sowing & Depth Reference Table</h2>
+        <p>Follow these quick rules of thumb when dropping your seeds or placing live starters into your newly blended organic soil:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Vegetable / Plant</th>
+                    <th>Method</th>
+                    <th>Planting Depth</th>
+                    <th>Ideal Placement & Tips</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Clemson Spineless Okra</strong></td>
+                    <td>Direct Seed Now</td>
+                    <td>1/2 inch deep</td>
+                    <td>Back center. Loves intense heat. Grows tall.</td>
+                </tr>
+                <tr>
+                    <td><strong>Jade Bush Bean</strong></td>
+                    <td>Direct Seed Now</td>
+                    <td>1 inch deep</td>
+                    <td>Mid-bed space filler. Spreads out low. No trellis needed.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dark Green Zucchini</strong></td>
+                    <td>Direct Seed Now</td>
+                    <td>1 inch deep</td>
+                    <td>One corner only. Grows very massive leaves quickly.</td>
+                </tr>
+                <tr>
+                    <td><strong>Slow Bolt Cilantro</strong></td>
+                    <td>Direct Seed Now</td>
+                    <td>1/4 inch deep</td>
+                    <td>Plant directly under the shadow of okra/tomatoes to delay bolting.</td>
+                </tr>
+                <tr>
+                    <td><strong>Avarakai (Flat Beans)</strong></td>
+                    <td>Seed in July</td>
+                    <td>1 inch deep</td>
+                    <td>Bed #2 next to your Jasmine. Share the climbing trellis network.</td>
+                </tr>
+                <tr>
+                    <td><strong>Colorful Carrot Mix</strong></td>
+                    <td>Seed in Late August</td>
+                    <td>1/4 inch deep (barely cover)</td>
+                    <td>Keep soil damp for 14 days straight until they sprout.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dwarf Grey Sugar Pea</strong></td>
+                    <td>Seed in September</td>
+                    <td>1 inch deep</td>
+                    <td>Prefers cool winter air. Great for late fall snow peas.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>🛠️ 4-Step Bed Setup Process</h2>
+        <ol style="list-style-position: inside; padding-left: 10px;">
+            <li style="margin-bottom: 10px;"><strong>Position & Level:</strong> Lay your modular metal frame in a flat spot receiving at least 6 hours of unshaded sunlight.</li>
+            <li style="margin-bottom: 10px;"><strong>Weed Protection:</strong> Line the open bottom entirely with flat, unprinted brown cardboard boxes. Wet it down thoroughly to block incoming grass/weeds.</li>
+            <li style="margin-bottom: 10px;"><strong>Blend the Soils:</strong> Pour your dense Sta-Green Garden Soil and light Miracle-Gro Potting Mix evenly together directly inside the bed, fluffing with your hands or a hand trowel.</li>
+            <li style="margin-bottom: 10px;"><strong>Deep Initial Water:</strong> Water the entire bed gently for 3-5 minutes until completely saturated before dropping seeds.</li>
+        </ol>
+    </div>
+
+    <div class="footer">
+        <p>Custom Garden Planner • Designed for the South Bay Climate Ecosystem</p>
+    </div>
+</div>
+
+</body>
+</html>
+"""
+
+with open("garden_blueprint.html", "w") as f:
+    f.write(html_content)
+
+print("HTML Page created successfully.")
