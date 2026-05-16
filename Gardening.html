@@ -13,6 +13,8 @@
             --dark: #263238;
             --light: #ffffff;
             --border: #cfd8dc;
+            --danger-light: #ffebee;
+            --danger-text: #c62828;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #f8f9fa; color: var(--dark); line-height: 1.6; padding: 15px; }
@@ -22,8 +24,10 @@
         header p { font-size: 1.05rem; opacity: 0.9; }
         .section-card { background-color: var(--light); border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); border-top: 5px solid var(--primary); }
         .section-card.alt { border-top-color: var(--accent); }
+        .section-card.danger { border-top-color: var(--danger-text); }
         h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .section-card.alt h2 { color: var(--accent); }
+        .section-card.danger h2 { color: var(--danger-text); }
         
         /* INFRASTRUCTURE BLUEPRINT INFOGRAPHIC STYLING */
         .infographic-container { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
@@ -44,6 +48,14 @@
         
         ol, ul { padding-left: 20px; font-size: 0.95rem; }
         li { margin-bottom: 8px; }
+        .roster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+        .roster-card { background: #fdfdfd; border: 1px solid var(--border); padding: 15px; border-radius: 6px; }
+        .roster-card h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--dark); }
+        .tag { display: inline-block; padding: 2px 8px; font-size: 0.75rem; font-weight: bold; border-radius: 3px; background: #cfd8dc; color: #37474f; margin-bottom: 8px; }
+        .tag.heavy { background: #ffe0b2; color: #e65100; }
+        .tag.light { background: #e8f5e9; color: #1b5e20; }
+        .tag.sit { background: #e1f5fe; color: #01579b; }
+
         footer { text-align: center; margin-top: 40px; font-size: 0.85rem; color: #90a4ae; padding: 20px; border-top: 1px solid var(--border); }
     </style>
 </head>
@@ -55,20 +67,43 @@
         <p>Deployment Blueprints, Components, & Tooling Application</p>
     </header>
 
+    <div class="section-card danger">
+        <h2>👥 Field Crew Work Allocations & Safety Controls</h2>
+        <p style="font-size: 0.95rem;">Operational strategy adjusted to leverage specific technical experience while mitigating heavy load stress or airborne irritants.</p>
+        
+        <div class="roster-grid">
+            <div class="roster-card" style="border-left: 4px solid var(--accent);">
+                <span class="tag heavy">🏋️ Heavy Duty / Infrastructure</span>
+                <h3>Jai (Lead), Giri, Mukundan</h3>
+                <p style="font-size: 0.85rem; color: #555;">Jai drives site layout precision and tech oversight. Giri and Mukundan leverage raw power under Jai's direction to handle mulch scraping, tool leverage work, and soil logistics.</p>
+            </div>
+            <div class="roster-card" style="border-left: 4px solid var(--primary);">
+                <span class="tag light">🌿 Precision Sowing & Agile Work</span>
+                <h3>Srishail (16), Yathokth, Mahiya</h3>
+                <p style="font-size: 0.85rem; color: #555;">Youth team execution. Handles seed sorting, depth verification matrixes, planting out live starter containers, and tracking spacing requirements safely inside the bed boundaries.</p>
+            </div>
+            <div class="roster-card" style="border-left: 4px solid #01579b;">
+                <span class="tag sit">🛑 QC Supervision & Final Hydration</span>
+                <h3>Archena, Janu</h3>
+                <p style="font-size: 0.85rem; color: #555;"><strong>Zero lifting / Zero dust zone.</strong> Archena directs live blueprint checks from a comfortable seating layout to prevent back strain. Janu acts as Hydration Engineer, managing low-effort water soaking tasks without inhaling dry soil dust.</p>
+            </div>
+        </div>
+    </div>
+
     <div class="section-card">
         <h2>📸 Reference Field Assets & Component Schematics</h2>
         <p style="font-size: 0.95rem; margin-bottom: 15px;">Comprehensive architectural schematics isolating component parameters, spatial layouts, tool actions, and deep substrate preparation pipelines.</p>
         
         <div class="infographic-container">
             <div class="infographic-card">
-                <img src="assets/yard-layout.jpg" alt="Garden Components and Purchasing Blueprint Image">
+                <img src="assets/yard-layout.png" alt="Garden Components and Purchasing Blueprint Image">
                 <div class="infographic-caption">
                     <strong>Schematic 1.0: Component Architecture Map</strong> – Individual breakdown tracking purchase packages, live starter distributions, and horizontal space allocation guidelines.
                 </div>
             </div>
             
             <div class="infographic-card">
-                <img src="assets/tools.jpg" alt="Garden Tools and Site Prep Diagram Image">
+                <img src="assets/tools.png" alt="Garden Tools and Site Prep Diagram Image">
                 <div class="infographic-caption">
                     <strong>Schematic 1.1: Substrate Fractioning & Tooling Mechanics</strong> – Deep-tier soil engineering workflow utilizing transfer tools and digging tines to fracture native clay compaction beneath the bed.
                 </div>
@@ -172,15 +207,15 @@
     <div class="section-card">
         <h2>🛠️ Substrate Engineering & Execution Workflow</h2>
         <ol>
-            <li><strong>Surface Clearance:</strong> Drive a wide flat shovel across the targeted footprint to scrape back surface bark woodchips and expose underlying earth.</li>
-            <li><strong>Sub-Base Fracturing:</strong> Use a D-handle digging fork to penetrate the compacted native dirt base. Apply foot leverage to rock and crack open clay pan pathways.</li>
-            <li><strong>Weed Suppression:</strong> Place down dense, overlapping sheets of unprinted brown shipping cardboard over the fractured earth base and soak completely with water.</li>
-            <li><strong>Substrate Integration:</strong> Set up your modular open-bottom raised frames directly above the cardboard. Discharge your rich organic gardening soil bags and aeration potting mixes together inside the modular structure to create an airy, fertile growth zone.</li>
+            <li><strong>Surface Clearance (Jai, Giri, Mukundan):</strong> Drive a wide flat shovel across the targeted footprint to scrape back surface bark woodchips and expose underlying earth.</li>
+            <li><strong>Sub-Base Fracturing (Jai, Giri, Mukundan):</strong> Use a D-handle digging fork to penetrate the compacted native dirt base. Apply foot leverage to rock and crack open clay pan pathways.</li>
+            <li><strong>Weed Suppression (Team 1 + Kids):</strong> Place down dense, overlapping sheets of unprinted brown shipping cardboard over the fractured earth base and soak completely with water.</li>
+            <li><strong>Substrate Integration (Giri, Mukundan, Kids):</strong> Set up your modular open-bottom raised frames directly above the cardboard. Discharge your rich organic gardening soil bags and aeration potting mixes together inside the modular structure to create an airy, fertile growth zone.</li>
         </ol>
     </div>
 
     <footer>
-        <p>Open Source Backyard Engineering Blueprint Manual</p>
+        <p>Open Source Backyard Engineering Blueprint Manual • San Jose Team Edition</p>
     </footer>
 </div>
 
