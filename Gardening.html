@@ -39,6 +39,12 @@
         .infographic-card img { width: 100%; height: auto; display: block; max-height: 900px; object-fit: contain; background: #fdfdfd; }
         .infographic-caption { background: #f8f9fa; padding: 12px 15px; border-top: 1px solid var(--border); font-size: 0.9rem; color: #455a64; }
 
+        /* SOIL INVENTORY GALLERY STYLING */
+        .soil-gallery { display: flex; flex-direction: row; gap: 15px; justify-content: space-around; margin: 15px 0; flex-wrap: wrap; }
+        .soil-item { flex: 1; min-width: 240px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; text-align: center; background: #fafafa; }
+        .soil-item img { width: 100%; height: 220px; object-fit: contain; background: #ffffff; padding: 10px; }
+        .soil-item-title { padding: 8px; font-size: 0.9rem; font-weight: 600; color: var(--dark); background: #f1f1f1; border-top: 1px solid var(--border); }
+
         .split-layout { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
         @media (min-width: 768px) { .split-layout { flex-direction: row; } }
         .bed-blueprint { flex: 1; background: #f9fbe7; border: 2px dashed #9ccc65; border-radius: 8px; padding: 20px; }
@@ -111,6 +117,22 @@
                 <div class="infographic-caption">
                     <strong>Schematic 1.1: Substrate Fractioning & Tooling Mechanics</strong> – Deep-tier soil engineering workflow utilizing transfer tools and digging tines to fracture native clay compaction beneath the bed.
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card alt">
+        <h2>📦 Purchased Substrate Materials Inventory</h2>
+        <p style="font-size: 0.95rem;">Verify that the crew is opening the exact brand bags designated for the corresponding layout layer.</p>
+        
+        <div class="soil-gallery">
+            <div class="soil-item">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/9454733256414283083_0" alt="Sta-Green Garden Soil Bag">
+                <div class="soil-item-title">Layer 1: Sta-Green Garden Soil (Foundation Layer)</div>
+            </div>
+            <div class="soil-item">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/10633772234091221654_0" alt="Miracle-Gro Organic Potting Mix Bag">
+                <div class="soil-item-title">Layer 2: Miracle-Gro Organic Potting Mix (Aeration Top Layer)</div>
             </div>
         </div>
     </div>
@@ -226,7 +248,14 @@
             <li><strong>Site Leveling & Frame Build (Team 1):</strong> Calibrate the ground grade level, assemble the modular metal panels on the patio, and seat the square frame securely on the bare dirt.</li>
             <li><strong>Sub-Base Fracturing (Jai, Giri, Mukundan):</strong> Use a D-handle digging fork to penetrate the compacted native dirt base inside the frame. Apply foot leverage to rock and crack open clay pan pathways.</li>
             <li><strong>Weed Suppression (Team 1 + Kids):</strong> Place down dense, overlapping sheets of unprinted brown shipping cardboard over the fractured earth base inside the frame and soak completely with water.</li>
-            <li><strong>Substrate Integration (Giri, Mukundan, Kids):</strong> Discharge your rich organic gardening soil bags and aeration potting mixes together inside the modular structure to create an airy, fertile growth zone.</li>
+            <li><strong>Substrate Integration & Soil Layering (Giri, Mukundan, Kids):</strong> 
+                Discharge the specific purchased inventory inside the modular frame structure:
+                <ul>
+                    <li>Empty the heavy bags of <strong>Sta-Green Garden Soil</strong> directly over the wet cardboard base layer to establish a dense, moisture-retaining organic foundation.</li>
+                    <li>Layer the lightweight bags of <strong>Miracle-Gro Organic Potting Mix</strong> on top to maximize drainage and aeration properties.</li>
+                    <li>Use a shovel or garden hand fork to churn and mix the two layers together until completely uniform, forming an airy, fertile growth zone.</li>
+                </ul>
+            </li>
         </ol>
     </div>
 
