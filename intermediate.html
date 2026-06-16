@@ -1,1 +1,35 @@
-test
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy Viewer</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        #content { border: 1px solid #ccc; padding: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Enter URL to fetch via Proxy:</h2>
+    <input type="text" id="urlInput" placeholder="https://example.com" style="width: 300px;">
+    <button onclick="fetchPage()">Load Page</button>
+
+    <div id="content">Content will load here...</div>
+
+    <script>
+        async function fetchPage() {
+            const targetUrl = document.getElementById('urlInput').value;
+            // Using a free public CORS proxy to bypass restrictions
+            const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
+            
+            try {
+                const response = await fetch(proxyUrl);
+                const html = await response.text();
+                document.getElementById('content').innerHTML = html;
+            } catch (error) {
+                document.getElementById('content').innerHTML = "Error loading page: " + error;
+            }
+        }
+    </script>
+</body>
+</html>
