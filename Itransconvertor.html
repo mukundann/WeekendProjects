@@ -3,55 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SrIvaishNava Granthams Script Pipeline</title>
+    <title>SrIvaishNava Granthams Reader's Guide Script Converter</title>
     <style>
         :root {
-            --primary: #9333ea;
-            --primary-hover: #7e22ce;
-            --background: #fdfaf6;
+            --primary: #801515;
+            --primary-hover: #a71d1d;
+            --background: #faf6f0;
             --card: #ffffff;
-            --text: #2d241e;
-            --border: #e7d8c9;
+            --text: #2c1a1a;
+            --border: #dfc8c8;
+            --accent: #550000;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--background);
             color: var(--text);
-            padding: 20px;
             margin: 0;
-            line-height: 1.5;
+            padding: 20px;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        .header {
+        header {
             text-align: center;
             margin-bottom: 25px;
             border-bottom: 3px double var(--border);
             padding-bottom: 15px;
         }
 
+        h1 {
+            color: var(--accent);
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #705050;
+            margin: 0;
+            font-style: italic;
+        }
+
         .card {
             background: var(--card);
             padding: 24px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.05);
+            box-shadow: 0 4px 15px rgba(85, 0, 0, 0.05);
             border: 1px solid var(--border);
+            margin-bottom: 24px;
         }
 
         .controls {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
-            background: #f5efe6;
+            background: #fdfaf6;
             padding: 15px;
             border-radius: 8px;
+            border: 1px solid #eee2e2;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--accent);
         }
 
         select, button {
@@ -61,6 +81,7 @@
             border: 1px solid var(--border);
             background: white;
             font-weight: 500;
+            color: var(--text);
         }
 
         button {
@@ -68,60 +89,84 @@
             color: white;
             border: none;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
         }
 
         button:hover {
             background: var(--primary-hover);
         }
 
-        .pipeline-grid {
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .io-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
         @media (max-width: 768px) {
-            .pipeline-grid { grid-template-columns: 1fr; }
+            .io-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        label {
-            display: block;
+        .panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel label {
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #4c3d31;
         }
 
-        textarea, .output-box {
+        textarea {
             width: 100%;
-            height: 380px;
+            height: 350px;
             padding: 14px;
             font-size: 16px;
             border: 1px solid var(--border);
             border-radius: 8px;
             box-sizing: border-box;
+            font-family: "Courier New", Courier, monospace;
             resize: vertical;
+            background-color: #fffdfb;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(128, 21, 21, 0.15);
         }
 
         .output-box {
-            background: #faf7f2;
-            overflow-y: auto;
+            width: 100%;
+            height: 350px;
+            padding: 14px;
+            font-size: 20px; /* Highly legible for native Indic scripts */
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: #fdfcfb;
+            box-sizing: border-box;
             white-space: pre-wrap;
-            font-size: 19px; /* Enhanced legibility for native scripts */
+            overflow-y: auto;
+            color: #111;
         }
 
         .guide-box {
-            margin-top: 25px;
+            background: #f7ede3;
+            border: 1px dashed var(--border);
             padding: 15px;
-            background: #f5efe6;
             border-radius: 8px;
-            font-size: 14px;
+            margin-top: 15px;
         }
 
         .guide-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 10px;
+            font-size: 14px;
             margin-top: 10px;
         }
 
@@ -129,209 +174,263 @@
             background: white;
             padding: 6px 10px;
             border-radius: 4px;
-            border: 1px solid var(--border);
+            border: 1px solid #ebdada;
+        }
+
+        .guide-item code {
+            background: #fdf5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: var(--primary);
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h2>SrIvaishNava Granthams Transliteration Pipeline</h2>
-        <p style="color: #6b5a4c; margin: 5px 0 0 0;">Custom Converter using the specific pronunciation mappings from the Guide</p>
-    </div>
+    <header>
+        <h1>SrIvaishNava Granthams Script Converter</h1>
+        <p class="subtitle">Designed specifically according to the pronunciation guidelines of srivaishnavagranthams.wordpress.com</p>
+    </header>
 
     <div class="card">
         <div class="controls">
             <div>
-                <label for="scriptSelect">Target Script Platform:</label>
+                <label for="scriptSelect">Convert to Language: </label>
                 <select id="scriptSelect">
                     <option value="tamil">Tamil (Thamizh)</option>
                     <option value="devanagari">Devanagari (Sanskrit/Hindi)</option>
                 </select>
             </div>
-            <button id="convertBtn">Run Custom Parse Engine ↓</button>
+            <button id="convertBtn">Transliterate Verse Now ↓</button>
         </div>
 
-        <div class="pipeline-grid">
-            <div>
-                <label for="inputArea">Guide Input Text (Case-Sensitive):</label>
-                <textarea id="inputArea" placeholder="Try entering text like: emperumAnAr, rAmAnuja, AzhwAr, purushOththama, vratham, nama:"></textarea>
+        <div class="io-grid">
+            <div class="panel">
+                <label for="itransInput"><strong>Pasted ITRANS / Guide Text:</strong></label>
+                <textarea id="itransInput" placeholder="Enter verses here...&#10;e.g., aRivadhariyAn anaiththulagum udaiyAn ennai ALudaiyAn"></textarea>
             </div>
-            <div>
-                <label>Rendered Script Output:</label>
-                <div id="outputArea" class="output-box"></div>
+            <div class="panel">
+                <label><strong>Converted Output Script:</strong></label>
+                <div id="scriptOutput" class="output-box"></div>
             </div>
         </div>
 
         <div class="guide-box">
-            <strong>Active Rules Extracted From Provided Reference Guide:</strong>
+            <strong>Active Guide Rule Integrations:</strong>
             <div class="guide-grid">
-                <div class="guide-item"><code>A</code> &rarr; Long "aa" (rAmAnuja)</div>
-                <div class="guide-item"><code>E</code> &rarr; "yay" (EkAdhasi)</div>
-                <div class="guide-item"><code>I</code> &rarr; Long "ee" (Iswara)</div>
-                <div class="guide-item"><code>O</code> &rarr; "Oh" (Om)</div>
-                <div class="guide-item"><code>U</code> &rarr; Long "oo" (Urdhva)</div>
-                <div class="guide-item"><code>zh</code> &rarr; Strong Tamil "l" (AzhwAr)</div>
-                <div class="guide-item"><code>th / dh</code> &rarr; Meek Consonants</div>
-                <div class="guide-item"><code>t / d</code> &rarr; Strong Consonants</div>
-                <div class="guide-item"><code>:</code> &rarr; Visarga/Ha (nama:)</div>
+                <div class="guide-item"><code>A</code> &rarr; Long "aa" (அறிவதரியான்)</div>
+                <div class="guide-item"><code>E</code> &rarr; Long "ee" (தானே)</div>
+                <div class="guide-item"><code>thth</code> &rarr; Double meek t (அனைத்துலகும்)</div>
+                <div class="guide-item"><code>ng</code> &rarr; Nasal Cluster (பூதங்குடி)</div>
+                <div class="guide-item"><code>zh</code> &rarr; Very strong "l" (எழிலார்)</div>
+                <div class="guide-item"><code>L</code> &rarr; Strong "l" (கொள்)</div>
+                <div class="guide-item"><code>R</code> &rarr; Strong "r" (பொறி)</div>
+                <div class="guide-item"><code>d / dh</code> &rarr; Strong vs Meek "d"</div>
+                <div class="guide-item"><code>t / th</code> &rarr; Strong vs Meek "t"</div>
+                <div class="guide-item"><code>:</code> &rarr; Visarga (Nama:)</div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Parser Engine maps exactly to the patterns defined in the WordPress Reader's Guide
-    const lookupMap = {
-        devanagari: {
-            vowels: [
-                { match: 'A', char: 'आ' }, { match: 'I', char: 'ई' }, { match: 'U', char: 'ऊ' },
-                { match: 'E', char: 'ए' }, { match: 'O', char: 'ओ' }, { match: 'a', char: 'अ' },
-                { match: 'i', char: 'इ' }, { match: 'u', char: 'उ' }, { match: 'e', char: 'ए' }, 
-                { match: 'o', char: 'ओ' }
-            ],
-            vowelSigns: {
-                'a': '', 'A': 'ा', 'i': 'ि', 'I': 'ी', 'u': 'ु', 'U': 'ू', 
-                'e': 'े', 'E': 'े', 'o': 'ो', 'O': 'ो'
-            },
-            consonants: [
-                { match: 'ksha', char: 'क्ष' }, { match: 'thth', char: 'त्त्' },
-                { match: 'sha', char: 'ष' }, { match: 'Sa', char: 'श' }, 
-                { match: 'sa', char: 'स' }, { match: 'ha', char: 'ह' },
-                { match: 'kha', char: 'ख' }, { match: 'gha', char: 'घ' },
-                { match: 'cha', char: 'च' }, { match: 'chha', char: 'छ' }, 
-                { match: 'jha', char: 'झ' }, { match: 'pha', char: 'फ' }, 
-                { match: 'bha', char: 'भ' },
-                { match: 'tha', char: 'थ' }, { match: 'dh', char: 'ध' }, // Meek sounds
-                { match: 't', char: 'ट' }, { match: 'd', char: 'ड' },   // Strong sounds
-                { match: 'ka', char: 'क' }, { match: 'ga', char: 'ग' },
-                { match: 'pa', char: 'प' }, { match: 'ba', char: 'ब' }, 
-                { match: 'ma', char: 'म' }, { match: 'ya', char: 'य' }, 
-                { match: 'ra', char: 'र' }, { match: 'R', char: 'र' },
-                { match: 'la', char: 'ल' }, { match: 'L', char: 'ळ' }, 
-                { match: 'va', char: 'व' }, { match: 'w', char: 'व' },
-                { match: 'na', char: 'न' }, { match: 'N', char: 'ण' }
-            ],
-            halant: '्',
-            special: { ':': 'ः' }
-        },
-        tamil: {
-            vowels: [
-                { match: 'A', char: 'ஆ' }, { match: 'I', char: 'ஈ' }, { match: 'U', char: 'ஊ' },
-                { match: 'E', char: 'ஏ' }, { match: 'O', char: 'ஓ' }, { match: 'a', char: 'அ' },
-                { match: 'i', char: 'இ' }, { match: 'u', char: 'உ' }, { match: 'e', char: 'எ' }, 
-                { match: 'o', char: 'ஒ' }
-            ],
-            vowelSigns: {
-                'a': '', 'A': 'ா', 'i': 'ி', 'I': 'ீ', 'u': 'ு', 'U': 'ூ', 
-                'e': 'ெ', 'E': 'ே', 'o': 'ொ', 'O': 'ோ'
-            },
-            consonants: [
-                { match: 'ksha', char: 'க்ஷ' }, { match: 'sha', char: 'ஷ' }, 
-                { match: 'Sa', char: 'ஸ' }, { match: 'sa', char: 'ஸ' }, 
-                { match: 'ha', char: 'ஹ' }, { match: 'ja', char: 'ஜ' },
-                { match: 'zh', char: 'ழ' }, // Special strong Tamil sound
-                { match: 'thth', char: 'த்த' }, { match: 'th', char: 'த' }, 
-                { match: 'dh', char: 'த' }, 
-                { match: 'RR', char: 'ற்ற' }, { match: 'R', char: 'ற' },  
-                { match: 'ka', char: 'க' }, { match: 't', char: 'ட' }, 
-                { match: 'd', char: 'ட' }, { match: 'pa', char: 'ப' }, 
-                { match: 'ma', char: 'ம' }, { match: 'ya', char: 'ய' }, 
-                { match: 'ra', char: 'ர' }, { match: 'la', char: 'ல' }, 
-                { match: 'L', char: 'ள' }, { match: 'va', char: 'வ' }, 
-                { match: 'w', char: 'வ' }, { match: 'na', char: 'ந' }, 
-                { match: 'N', char: 'ண' }
-            ],
-            halant: '்',
-            special: { ':': 'ஃ' }
-        }
-    };
-
-    function parseGuideString(text, lang) {
+    // Universal mapping engine explicitly parsed using consonant stems and dynamic look-aheads
+    function parseSrivaishnavaGranthams(text, lang) {
         if (!text) return '';
-        const currentRules = lookupMap[lang];
+        
         let result = '';
         let i = 0;
         const len = text.length;
 
-        // Sort vowel identifiers cleanly by length to ensure precise evaluation
-        const sortedVowelKeys = Object.keys(currentRules.vowelSigns).sort((a,b) => b.length - a.length);
+        // Vowels lookup
+        const standaloneVowels = {
+            'A': { tamil: 'ஆ', devanagari: 'आ' },
+            'I': { tamil: 'ஈ', devanagari: 'ई' },
+            'U': { tamil: 'ஊ', devanagari: 'ऊ' },
+            'E': { tamil: 'ஏ', devanagari: 'ए' },
+            'O': { tamil: 'ஓ', devanagari: 'ओ' },
+            'ai': { tamil: 'ஐ', devanagari: 'ऐ' },
+            'au': { tamil: 'ஔ', devanagari: 'औ' },
+            'a': { tamil: 'அ', devanagari: 'अ' },
+            'i': { tamil: 'இ', devanagari: 'इ' },
+            'u': { tamil: 'உ', devanagari: 'उ' },
+            'e': { tamil: 'எ', devanagari: 'ए' },
+            'o': { tamil: 'ஒ', devanagari: 'ओ' }
+        };
+
+        const vowelSigns = {
+            'A': { tamil: 'ா', devanagari: 'ा' },
+            'I': { tamil: 'ீ', devanagari: 'ी' },
+            'U': { tamil: 'ூ', devanagari: 'ू' },
+            'E': { tamil: 'ே', devanagari: 'े' },
+            'O': { tamil: 'ோ', devanagari: 'ो' },
+            'ai': { tamil: 'ை', devanagari: 'ै' },
+            'au': { tamil: 'ௌ', devanagari: 'ौ' },
+            'a': { tamil: '', devanagari: '' },
+            'i': { tamil: 'ி', devanagari: 'ि' },
+            'u': { tamil: 'ு', devanagari: 'ु' },
+            'e': { tamil: 'ெ', devanagari: 'े' },
+            'o': { tamil: 'ொ', devanagari: 'ो' }
+        };
+
+        const sortedVowelKeys = Object.keys(vowelSigns).sort((a, b) => b.length - a.length);
+
+        // Strict Consonant Stems mapped to the phonetic definitions in the WordPress Guide
+        const consonants = [
+            { match: 'thth', tamil: 'த்த', devanagari: 'त्त्' },
+            { match: 'ksh', tamil: 'க்ஷ', devanagari: 'क्ष' },
+            { match: 'sha', tamil: 'ஷ', devanagari: 'ष' },
+            { match: 'sh', tamil: 'ஷ', devanagari: 'ष' },
+            { match: 'Sa', tamil: 'ஸ', devanagari: 'श' }, // Sa is used for strong "s"
+            { match: 'th', tamil: 'த', devanagari: 'त' },  // meek "t" -> dental
+            { match: 'dh', tamil: 'த', devanagari: 'द' },  // meek "d" -> dental
+            { match: 'zh', tamil: 'ழ', devanagari: 'ळ' },  // very strong "l"
+            { match: 'RR', tamil: 'ற்ற', devanagari: 'त्र' }, // double RR -> "tr" sound
+            { match: 'kh', tamil: 'க', devanagari: 'ख' },
+            { match: 'gh', tamil: 'க', devanagari: 'घ' },
+            { match: 'ch', tamil: 'ச', devanagari: 'च' },
+            { match: 'jh', tamil: 'ஜ', devanagari: 'झ' },
+            { match: 'Th', tamil: 'ட', devanagari: 'ठ' },
+            { match: 'Dh', tamil: 'ட', devanagari: 'ढ' },
+            { match: 'ph', tamil: 'ப', devanagari: 'फ' },
+            { match: 'bh', tamil: 'ப', devanagari: 'भ' },
+            { match: 'ng', tamil: 'ங', devanagari: 'ङ' }, // handled dynamically for cluster rules
+            { match: 's', tamil: 'ஸ', devanagari: 'स' },
+            { match: 'h', tamil: 'ஹ', devanagari: 'ह' },
+            { match: 'j', tamil: 'ஜ', devanagari: 'ज' },
+            { match: 'R', tamil: 'ற', devanagari: 'र' },   // strong "r"
+            { match: 'r', tamil: 'ர', devanagari: 'र' },   // soft "r"
+            { match: 'k', tamil: 'க', devanagari: 'क' },
+            { match: 'g', tamil: 'க', devanagari: 'ग' },
+            { match: 'p', tamil: 'ப', devanagari: 'प' },
+            { match: 'b', tamil: 'ப', devanagari: 'ब' },
+            { match: 'm', tamil: 'ம', devanagari: 'म' },
+            { match: 'y', tamil: 'ய', devanagari: 'य' },
+            { match: 'l', tamil: 'ல', devanagari: 'ल' },
+            { match: 'L', tamil: 'ள', devanagari: 'ळ' },   // strong "l"
+            { match: 'v', tamil: 'வ', devanagari: 'व' },
+            { match: 'w', tamil: 'வ', devanagari: 'व' },
+            { match: 'n', tamil: 'ந', devanagari: 'न' },   // dynamically changes to ன/ந in Tamil
+            { match: 'N', tamil: 'ண', devanagari: 'ण' },   // strong "n"
+            { match: 't', tamil: 'ட', devanagari: 'ट' },   // strong "t"
+            { match: 'd', tamil: 'ட', devanagari: 'ड' }    // strong "d"
+        ];
+
+        const halant = { tamil: '்', devanagari: '्' };
 
         while (i < len) {
-            let matched = false;
+            let charMatched = false;
 
-            // 1. Process explicit character exceptions (like Visarga ':')
-            if (currentRules.special[text[i]]) {
-                result += currentRules.special[text[i]];
+            // 1. Visarga exception
+            if (text[i] === ':') {
+                result += (lang === 'tamil') ? 'ஃ' : 'ः';
                 i++;
                 continue;
             }
 
-            // 2. High priority match for Consonants
-            for (let j = 0; j < currentRules.consonants.length; j++) {
-                const c = currentRules.consonants[j];
-                const stem = c.match;
-                
-                if (text.startsWith(stem, i)) {
-                    let baseConsonant = c.char;
-                    let matchLen = stem.length;
-                    let vowelFound = false;
+            // 2. Scan and match consonants first
+            for (let c of consonants) {
+                const matchStr = c.match;
+                const matchLen = matchStr.length;
 
-                    // Read future buffer safely for trailing vowel bounds
-                    for (let k = 0; k < sortedVowelKeys.length; k++) {
-                        const v = sortedVowelKeys[k];
+                if (text.startsWith(matchStr, i)) {
+                    let baseChar = c[lang];
+
+                    // Dynamic contextual 'n' mapping for Tamil (ந vs ன)
+                    if (lang === 'tamil' && matchStr === 'n') {
+                        const isWordStart = (i === 0 || /[^a-zA-Z]/.test(text[i - 1]));
+                        const nextIsDental = text.startsWith('th', i + 1) || text.startsWith('dh', i + 1) || text.startsWith('t', i + 1) || text.startsWith('d', i + 1);
+                        
+                        if (isWordStart || nextIsDental) {
+                            baseChar = 'ந'; // Dental "n"
+                        } else {
+                            baseChar = 'ன'; // Alveolar "n"
+                        }
+                    }
+
+                    // Look ahead for vowel signs
+                    let vowelFound = false;
+                    let matchedVowel = '';
+
+                    for (let v of sortedVowelKeys) {
                         if (text.startsWith(v, i + matchLen)) {
-                            result += baseConsonant + currentRules.vowelSigns[v];
-                            i += matchLen + v.length;
+                            matchedVowel = v;
                             vowelFound = true;
                             break;
                         }
                     }
 
-                    if (!vowelFound) {
-                        // Apply Virama/Halant if consonant is terminal or stands alone
-                        result += baseConsonant + currentRules.halant;
+                    if (vowelFound) {
+                        // Special rule for 'ng' cluster (converting "ng" + "u" to "ங்கு" instead of "ஙு")
+                        if (matchStr === 'ng') {
+                            if (lang === 'tamil') {
+                                result += 'ங்' + 'க' + vowelSigns[matchedVowel].tamil;
+                            } else {
+                                result += 'ङ्' + 'ग' + vowelSigns[matchedVowel].devanagari;
+                            }
+                        } else {
+                            result += baseChar + vowelSigns[matchedVowel][lang];
+                        }
+                        i += matchLen + matchedVowel.length;
+                    } else {
+                        // No vowel follows: append a pure dead consonant (Halant/Pulli)
+                        if (matchStr === 'ng') {
+                            result += (lang === 'tamil') ? 'ங்' : 'ङ्';
+                        } else {
+                            result += baseChar + halant[lang];
+                        }
                         i += matchLen;
                     }
-                    matched = true;
+                    charMatched = true;
                     break;
                 }
             }
 
-            if (matched) continue;
+            if (charMatched) continue;
 
-            // 3. Fallback priority match for Independent Vowels
-            for (let j = 0; j < currentRules.vowels.length; j++) {
-                const v = currentRules.vowels[j];
-                if (text.startsWith(v.match, i)) {
-                    result += v.char;
-                    i += v.match.length;
-                    matched = true;
+            // 3. Scan and match independent vowels
+            const sortedStandaloneKeys = Object.keys(standaloneVowels).sort((a, b) => b.length - a.length);
+            for (let v of sortedStandaloneKeys) {
+                if (text.startsWith(v, i)) {
+                    result += standaloneVowels[v][lang];
+                    i += v.length;
+                    charMatched = true;
                     break;
                 }
             }
 
-            if (matched) continue;
+            if (charMatched) continue;
 
-            // 4. Default bypass fallback for layout preservation (spaces/newlines/symbols)
+            // 4. Default bypass fallback (layouts, spaces, punctuation)
             result += text[i];
             i++;
         }
+
         return result;
     }
 
-    document.getElementById('convertBtn').addEventListener('click', () => {
-        const inputData = document.getElementById('inputArea').value;
-        const selectedLang = document.getElementById('scriptSelect').value;
-        const targetOutput = document.getElementById('outputArea');
+    // Interactive hooks
+    const itransInput = document.getElementById('itransInput');
+    const scriptSelect = document.getElementById('scriptSelect');
+    const scriptOutput = document.getElementById('scriptOutput');
+    const convertBtn = document.getElementById('convertBtn');
 
-        targetOutput.textContent = "Processing script parameters...";
+    function performConversion() {
+        const rawText = itransInput.value;
+        const targetLang = scriptSelect.value;
+        scriptOutput.textContent = parseSrivaishnavaGranthams(rawText, targetLang);
+    }
 
-        setTimeout(() => {
-            targetOutput.textContent = parseGuideString(inputData, selectedLang);
-        }, 40);
-    });
+    // Run automatically while typing, but support explicit click
+    itransInput.addEventListener('input', performConversion);
+    scriptSelect.addEventListener('change', performConversion);
+    convertBtn.addEventListener('click', performConversion);
+
+    // Initial Example Run
+    itransInput.value = `aRivadhariyAn anaiththulagum udaiyAn ennai ALudaiyAn\nkuRiya mANi uruvAya kUththan manni amarumidam\nnaRiya malar mEl surumbArkka ezhilAr mangyai nadamAda\npoRi koL siRai vaNdu isai pAdum puLLam bUdhangudi thAnE`;
+    performConversion();
 </script>
 
 </body>
