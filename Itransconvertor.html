@@ -3,58 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulk ITRANS Converter</title>
+    <title>SrIvaishNava Granthams Script Pipeline</title>
     <style>
         :root {
-            --primary-color: #059669;
-            --primary-hover: #047857;
-            --background-color: #f1f5f9;
-            --card-background: #ffffff;
-            --text-color: #334155;
-            --border-color: #cbd5e1;
+            --primary: #9333ea;
+            --primary-hover: #7e22ce;
+            --background: #fdfaf6;
+            --card: #ffffff;
+            --text: #2d241e;
+            --border: #e7d8c9;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
             padding: 20px;
             margin: 0;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 3px double var(--border);
+            padding-bottom: 15px;
+        }
+
         .card {
-            background: var(--card-background);
+            background: var(--card);
             padding: 24px;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.05);
+            border: 1px solid var(--border);
         }
 
         .controls {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             align-items: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            background: #f5efe6;
+            padding: 15px;
+            border-radius: 8px;
         }
 
         select, button {
-            padding: 10px 20px;
+            padding: 10px 18px;
             font-size: 15px;
             border-radius: 6px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
             background: white;
+            font-weight: 500;
         }
 
         button {
-            background: var(--primary-color);
+            background: var(--primary);
             color: white;
             border: none;
-            font-weight: bold;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -63,187 +75,224 @@
             background: var(--primary-hover);
         }
 
-        .io-grid {
+        .pipeline-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
         @media (max-width: 768px) {
-            .io-grid { grid-template-columns: 1fr; }
+            .pipeline-grid { grid-template-columns: 1fr; }
         }
 
-        textarea {
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4c3d31;
+        }
+
+        textarea, .output-box {
             width: 100%;
-            height: 400px;
-            padding: 12px;
-            font-size: 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            height: 380px;
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
             box-sizing: border-box;
             resize: vertical;
         }
 
         .output-box {
-            width: 100%;
-            height: 400px;
-            padding: 12px;
-            font-size: 18px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: #f8fafc;
-            box-sizing: border-box;
+            background: #faf7f2;
             overflow-y: auto;
             white-space: pre-wrap;
+            font-size: 19px; /* Enhanced legibility for native scripts */
         }
 
-        .status-bar {
+        .guide-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f5efe6;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
             margin-top: 10px;
-            font-size: 13px;
-            color: #64748b;
+        }
+
+        .guide-item {
+            background: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Bulk ITRANS to Indic Script Engine</h2>
-    
+    <div class="header">
+        <h2>SrIvaishNava Granthams Transliteration Pipeline</h2>
+        <p style="color: #6b5a4c; margin: 5px 0 0 0;">Custom Converter using the specific pronunciation mappings from the Guide</p>
+    </div>
+
     <div class="card">
         <div class="controls">
             <div>
-                <label>Target Script: </label>
+                <label for="scriptSelect">Target Script Platform:</label>
                 <select id="scriptSelect">
+                    <option value="tamil">Tamil (Thamizh)</option>
                     <option value="devanagari">Devanagari (Sanskrit/Hindi)</option>
-                    <option value="tamil">Tamil</option>
                 </select>
             </div>
-            <button id="convertBtn">Convert Bulk Text ↓</button>
-            <div id="perfMetrics" class="status-bar"></div>
+            <button id="convertBtn">Run Custom Parse Engine ↓</button>
         </div>
 
-        <div class="io-grid">
+        <div class="pipeline-grid">
             <div>
-                <label style="display:block; margin-bottom:5px; font-weight:600;">Paste Bulk ITRANS Text Here:</label>
-                <textarea id="itransInput" placeholder="Paste chapters, books, or large lists of ITRANS text here..."></textarea>
+                <label for="inputArea">Guide Input Text (Case-Sensitive):</label>
+                <textarea id="inputArea" placeholder="Try entering text like: emperumAnAr, rAmAnuja, AzhwAr, purushOththama, vratham, nama:"></textarea>
             </div>
             <div>
-                <label style="display:block; margin-bottom:5px; font-weight:600;">Converted Native Output:</label>
-                <div id="scriptOutput" class="output-box"></div>
+                <label>Rendered Script Output:</label>
+                <div id="outputArea" class="output-box"></div>
+            </div>
+        </div>
+
+        <div class="guide-box">
+            <strong>Active Rules Extracted From Provided Reference Guide:</strong>
+            <div class="guide-grid">
+                <div class="guide-item"><code>A</code> &rarr; Long "aa" (rAmAnuja)</div>
+                <div class="guide-item"><code>E</code> &rarr; "yay" (EkAdhasi)</div>
+                <div class="guide-item"><code>I</code> &rarr; Long "ee" (Iswara)</div>
+                <div class="guide-item"><code>O</code> &rarr; "Oh" (Om)</div>
+                <div class="guide-item"><code>U</code> &rarr; Long "oo" (Urdhva)</div>
+                <div class="guide-item"><code>zh</code> &rarr; Strong Tamil "l" (AzhwAr)</div>
+                <div class="guide-item"><code>th / dh</code> &rarr; Meek Consonants</div>
+                <div class="guide-item"><code>t / d</code> &rarr; Strong Consonants</div>
+                <div class="guide-item"><code>:</code> &rarr; Visarga/Ha (nama:)</div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Comprehensive ruleset object
-    const rules = {
+    // Parser Engine maps exactly to the patterns defined in the WordPress Reader's Guide
+    const lookupMap = {
         devanagari: {
             vowels: [
-                {itrans: 'aa', script: 'आ'}, {itrans: 'A', script: 'आ'},
-                {itrans: 'ii', script: 'ई'}, {itrans: 'I', script: 'ई'},
-                {itrans: 'uu', script: 'ऊ'}, {itrans: 'U', script: 'ऊ'},
-                {itrans: 'ai', script: 'ऐ'}, {itrans: 'au', script: 'औ'},
-                {itrans: 'a', script: 'अ'}, {itrans: 'i', script: 'इ'},
-                {itrans: 'u', script: 'उ'}, {itrans: 'e', script: 'ए'},
-                {itrans: 'o', script: 'ओ'}
+                { match: 'A', char: 'आ' }, { match: 'I', char: 'ई' }, { match: 'U', char: 'ऊ' },
+                { match: 'E', char: 'ए' }, { match: 'O', char: 'ओ' }, { match: 'a', char: 'अ' },
+                { match: 'i', char: 'इ' }, { match: 'u', char: 'उ' }, { match: 'e', char: 'ए' }, 
+                { match: 'o', char: 'ओ' }
             ],
             vowelSigns: {
-                'a': '', 'aa': 'ा', 'A': 'ा', 'i': 'ि', 'ii': 'ी', 'I': 'ी',
-                'u': 'ु', 'uu': 'ू', 'U': 'ू', 'e': 'े', 'o': 'ो', 'ai': 'ै', 'au': 'ौ'
+                'a': '', 'A': 'ा', 'i': 'ि', 'I': 'ी', 'u': 'ु', 'U': 'ू', 
+                'e': 'े', 'E': 'े', 'o': 'ो', 'O': 'ो'
             },
             consonants: [
-                {itrans: 'kha', script: 'ख'}, {itrans: 'gha', script: 'घ'},
-                {itrans: 'cha', script: 'च'}, {itrans: 'chha', script: 'छ'},
-                {itrans: 'jha', script: 'झ'}, {itrans: 'Tha', script: 'ठ'},
-                {itrans: 'Dha', script: 'ढ'}, {itrans: 'tha', script: 'थ'},
-                {itrans: 'dha', script: 'ध'}, {itrans: 'pha', script: 'फ'},
-                {itrans: 'bha', script: 'भ'}, {itrans: 'ka', script: 'क'},
-                {itrans: 'ga', script: 'ग'}, {itrans: 'ta', script: 'त'},
-                {itrans: 'da', script: 'द'}, {itrans: 'pa', script: 'प'},
-                {itrans: 'ba', script: 'ब'}, {itrans: 'ma', script: 'म'},
-                {itrans: 'ya', script: 'य'}, {itrans: 'ra', script: 'र'},
-                {itrans: 'la', script: 'ल'}, {itrans: 'va', script: 'व'},
-                {itrans: 'sha', script: 'श'}, {itrans: 'Sha', script: 'ष'},
-                {itrans: 'sa', script: 'स'}, {itrans: 'ha', script: 'ह'},
-                {itrans: 'na', script: 'न'}, {itrans: 'Na', script: 'ण'},
-                {itrans: 'Ta', script: 'ट'}, {itrans: 'Da', script: 'ड'}
+                { match: 'ksha', char: 'क्ष' }, { match: 'thth', char: 'त्त्' },
+                { match: 'sha', char: 'ष' }, { match: 'Sa', char: 'श' }, 
+                { match: 'sa', char: 'स' }, { match: 'ha', char: 'ह' },
+                { match: 'kha', char: 'ख' }, { match: 'gha', char: 'घ' },
+                { match: 'cha', char: 'च' }, { match: 'chha', char: 'छ' }, 
+                { match: 'jha', char: 'झ' }, { match: 'pha', char: 'फ' }, 
+                { match: 'bha', char: 'भ' },
+                { match: 'tha', char: 'थ' }, { match: 'dh', char: 'ध' }, // Meek sounds
+                { match: 't', char: 'ट' }, { match: 'd', char: 'ड' },   // Strong sounds
+                { match: 'ka', char: 'क' }, { match: 'ga', char: 'ग' },
+                { match: 'pa', char: 'प' }, { match: 'ba', char: 'ब' }, 
+                { match: 'ma', char: 'म' }, { match: 'ya', char: 'य' }, 
+                { match: 'ra', char: 'र' }, { match: 'R', char: 'र' },
+                { match: 'la', char: 'ल' }, { match: 'L', char: 'ळ' }, 
+                { match: 'va', char: 'व' }, { match: 'w', char: 'व' },
+                { match: 'na', char: 'न' }, { match: 'N', char: 'ण' }
             ],
-            halant: '्'
+            halant: '्',
+            special: { ':': 'ः' }
         },
         tamil: {
             vowels: [
-                {itrans: 'aa', script: 'ஆ'}, {itrans: 'A', script: 'ஆ'},
-                {itrans: 'ii', script: 'ஈ'}, {itrans: 'I', script: 'ஈ'},
-                {itrans: 'uu', script: 'ஊ'}, {itrans: 'U', script: 'ஊ'},
-                {itrans: 'ai', script: 'ஐ'}, {itrans: 'au', script: 'ஔ'},
-                {itrans: 'a', script: 'அ'}, {itrans: 'i', script: 'இ'},
-                {itrans: 'u', script: 'உ'}, {itrans: 'e', script: 'எ'},
-                {itrans: 'E', script: 'ஏ'}, {itrans: 'o', script: 'ஒ'},
-                {itrans: 'O', script: 'ஓ'}
+                { match: 'A', char: 'ஆ' }, { match: 'I', char: 'ஈ' }, { match: 'U', char: 'ஊ' },
+                { match: 'E', char: 'ஏ' }, { match: 'O', char: 'ஓ' }, { match: 'a', char: 'அ' },
+                { match: 'i', char: 'இ' }, { match: 'u', char: 'உ' }, { match: 'e', char: 'எ' }, 
+                { match: 'o', char: 'ஒ' }
             ],
             vowelSigns: {
-                'a': '', 'aa': 'ா', 'A': 'ா', 'i': 'ி', 'ii': 'ீ', 'I': 'ீ',
-                'u': 'ு', 'uu': 'ூ', 'U': 'ூ', 'e': 'ெ', 'E': 'ே', 'o': 'ொ', 
-                'O': 'ோ', 'ai': 'ை', 'au': 'ௌ'
+                'a': '', 'A': 'ா', 'i': 'ி', 'I': 'ீ', 'u': 'ு', 'U': 'ூ', 
+                'e': 'ெ', 'E': 'ே', 'o': 'ொ', 'O': 'ோ'
             },
             consonants: [
-                {itrans: 'ka', script: 'க'}, {itrans: 'nga', script: 'ங'},
-                {itrans: 'cha', script: 'ச'}, {itrans: 'nja', script: 'ஞ'},
-                {itrans: 'Ta', script: 'ட'}, {itrans: 'Na', script: 'ண'},
-                {itrans: 'ta', script: 'த'}, {itrans: 'na', script: 'ந'},
-                {itrans: 'pa', script: 'ப'}, {itrans: 'ma', script: 'ம'},
-                {itrans: 'ya', script: 'ய'}, {itrans: 'ra', script: 'ர'},
-                {itrans: 'la', script: 'ல'}, {itrans: 'va', script: 'வ'},
-                {itrans: 'zha', script: 'ழ'}, {itrans: 'La', script: 'ள'},
-                {itrans: 'Ra', script: 'ற'}, {itrans: 'naa', script: 'ன'},
-                {itrans: 'ja', script: 'ஜ'}, {itrans: 'sha', script: 'ஷ'},
-                {itrans: 'sa', script: 'ஸ'}, {itrans: 'ha', script: 'ஹ'}
+                { match: 'ksha', char: 'க்ஷ' }, { match: 'sha', char: 'ஷ' }, 
+                { match: 'Sa', char: 'ஸ' }, { match: 'sa', char: 'ஸ' }, 
+                { match: 'ha', char: 'ஹ' }, { match: 'ja', char: 'ஜ' },
+                { match: 'zh', char: 'ழ' }, // Special strong Tamil sound
+                { match: 'thth', char: 'த்த' }, { match: 'th', char: 'த' }, 
+                { match: 'dh', char: 'த' }, 
+                { match: 'RR', char: 'ற்ற' }, { match: 'R', char: 'ற' },  
+                { match: 'ka', char: 'க' }, { match: 't', char: 'ட' }, 
+                { match: 'd', char: 'ட' }, { match: 'pa', char: 'ப' }, 
+                { match: 'ma', char: 'ம' }, { match: 'ya', char: 'ய' }, 
+                { match: 'ra', char: 'ர' }, { match: 'la', char: 'ல' }, 
+                { match: 'L', char: 'ள' }, { match: 'va', char: 'வ' }, 
+                { match: 'w', char: 'வ' }, { match: 'na', char: 'ந' }, 
+                { match: 'N', char: 'ண' }
             ],
-            halant: '்'
+            halant: '்',
+            special: { ':': 'ஃ' }
         }
     };
 
-    // Cached, pre-sorted vowel signs to maximize search performance in loops
-    const sortedVowelCache = {};
-    Object.keys(rules).forEach(lang => {
-        sortedVowelCache[lang] = Object.keys(rules[lang].vowelSigns).sort((a,b) => b.length - a.length);
-    });
-
-    function convertChunk(text, lang) {
+    function parseGuideString(text, lang) {
         if (!text) return '';
-        const currentRules = rules[lang];
-        const sortedVowels = sortedVowelCache[lang];
+        const currentRules = lookupMap[lang];
         let result = '';
         let i = 0;
         const len = text.length;
 
+        // Sort vowel identifiers cleanly by length to ensure precise evaluation
+        const sortedVowelKeys = Object.keys(currentRules.vowelSigns).sort((a,b) => b.length - a.length);
+
         while (i < len) {
             let matched = false;
 
-            // Step 1: Optimized Consonant Check
+            // 1. Process explicit character exceptions (like Visarga ':')
+            if (currentRules.special[text[i]]) {
+                result += currentRules.special[text[i]];
+                i++;
+                continue;
+            }
+
+            // 2. High priority match for Consonants
             for (let j = 0; j < currentRules.consonants.length; j++) {
                 const c = currentRules.consonants[j];
-                const stem = c.itrans.slice(0, -1); 
-                const stemLen = stem.length;
+                const stem = c.match;
                 
                 if (text.startsWith(stem, i)) {
-                    let baseConsonant = c.script;
+                    let baseConsonant = c.char;
+                    let matchLen = stem.length;
                     let vowelFound = false;
-                    
-                    for (let k = 0; k < sortedVowels.length; k++) {
-                        const v = sortedVowels[k];
-                        if (text.startsWith(v, i + stemLen)) {
+
+                    // Read future buffer safely for trailing vowel bounds
+                    for (let k = 0; k < sortedVowelKeys.length; k++) {
+                        const v = sortedVowelKeys[k];
+                        if (text.startsWith(v, i + matchLen)) {
                             result += baseConsonant + currentRules.vowelSigns[v];
-                            i += stemLen + v.length;
+                            i += matchLen + v.length;
                             vowelFound = true;
                             break;
                         }
                     }
-                    
+
                     if (!vowelFound) {
+                        // Apply Virama/Halant if consonant is terminal or stands alone
                         result += baseConsonant + currentRules.halant;
-                        i += stemLen;
+                        i += matchLen;
                     }
                     matched = true;
                     break;
@@ -252,12 +301,12 @@
 
             if (matched) continue;
 
-            // Step 2: Independent Vowel Check
+            // 3. Fallback priority match for Independent Vowels
             for (let j = 0; j < currentRules.vowels.length; j++) {
                 const v = currentRules.vowels[j];
-                if (text.startsWith(v.itrans, i)) {
-                    result += v.script;
-                    i += v.itrans.length;
+                if (text.startsWith(v.match, i)) {
+                    result += v.char;
+                    i += v.match.length;
                     matched = true;
                     break;
                 }
@@ -265,35 +314,23 @@
 
             if (matched) continue;
 
-            // Step 3: Fast Skip non-transliterated symbols
+            // 4. Default bypass fallback for layout preservation (spaces/newlines/symbols)
             result += text[i];
             i++;
         }
         return result;
     }
 
-    // Execution handler with microsecond benchmarking
     document.getElementById('convertBtn').addEventListener('click', () => {
-        const inputData = document.getElementById('itransInput').value;
+        const inputData = document.getElementById('inputArea').value;
         const selectedLang = document.getElementById('scriptSelect').value;
-        const outDiv = document.getElementById('scriptOutput');
-        const metricsDiv = document.getElementById('perfMetrics');
+        const targetOutput = document.getElementById('outputArea');
 
-        outDiv.textContent = "Processing bulk data...";
-        metricsDiv.textContent = "";
+        targetOutput.textContent = "Processing script parameters...";
 
-        // Wrap execution in a macro-task timeout to let the UI display the loader text
         setTimeout(() => {
-            const t0 = performance.now();
-            
-            // Process text block cleanly
-            const convertedText = convertChunk(inputData, selectedLang);
-            
-            const t1 = performance.now();
-            
-            outDiv.textContent = convertedText;
-            metricsDiv.textContent = `Processed ${inputData.length.toLocaleString()} characters in ${((t1 - t0)).toFixed(2)} ms.`;
-        }, 50);
+            targetOutput.textContent = parseGuideString(inputData, selectedLang);
+        }, 40);
     });
 </script>
 
